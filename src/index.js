@@ -15,7 +15,7 @@ module.exports = function makeExchange(currency) {
     for (c in x) {
         q = Math.floor(rest/x[c]);
         if (q) {
-            res[y[c]] = q;
+            result[y[c]] = q;
         }
         rest = rest % x[c];
         if (rest === 0) {
