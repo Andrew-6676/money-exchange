@@ -6,20 +6,20 @@ module.exports = function makeExchange(currency) {
     if (currency<0) {
         return {}
     }
-
-    x = [50, 25, 10, 5, 1];
-    y = ['H', 'Q', 'D', 'N', 'P'];
-
-    result = {};
-    rest = currency;
-    for (c in x) {
-        q = Math.floor(rest/x[c]);
-        if (q) {
-            result[y[c]] = q;
+    let c = [
+        {l:'H', v:50},
+        {l:'Q', v:25},
+        {l:'D', v:10},
+        {l:'N', v:5},
+        {l:'P', v:1},
+    ];
+    let result = {};
+    c.forEach( x => {
+        q = Math.floor(currency/x.v);
+        if (q > 0) {
+            result[x.l] = q;
+            currency = currency % x.v;
         }
-        rest = rest % x[c];
-        if (rest === 0) {
-            return result;
-        }
-    }
+    });
+    return result;
 };
